@@ -5,9 +5,6 @@ export default class App extends Component {
 
   componentDidMount() {
 
-    console.log('Introducing debugger first time. Starting =====');
-    debugger;
-    console.log('Introducing debugger first time. Ending =====');
   }
 
   render() {
