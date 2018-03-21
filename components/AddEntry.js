@@ -7,7 +7,9 @@ export default class AddEntry extends Component {
 
     return (
       <View>
-        <Text>Add Entry</Text>
+        {
+          getMetricMetaInfo('bike').getIcon()
+        }
       </View>
     )
   }
