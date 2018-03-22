@@ -54,7 +54,7 @@ export function getMetricMetaInfo(metric) {
         return (
           <View>
             <MaterialCommunityIcons
-              name='wim'
+              name='swim'
               color={gray}
               size={35}
             />
@@ -98,7 +98,7 @@ export function getMetricMetaInfo(metric) {
     }
   }
 
-  return (typeof info === 'undefined' || info[metric] === 'undefined')
+  return (typeof metric === 'undefined' || typeof info[metric] === 'undefined')
     ? info :
     info[metric];
 }
