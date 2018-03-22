@@ -94,8 +94,26 @@ export default class AddEntry extends Component {
 
             return (
               <View key={metric}>
+
+                {getIcon()}
+
                 {
-                  getIcon()
+                  type === 'slider'
+                    ? <UdaciSlider
+                      value={value}
+                      onChange={
+                        () => {
+                          this.slide(metric, value)
+                        }
+                      }
+                      {...rest}
+                    />
+                    : <UdaciSteppers
+                      onIncrement={this.increment}
+                      onDecrement={this.decrement}
+                      value={value}
+                      {...rest}
+                    />
                 }
               </View>
             )
