@@ -39,8 +39,8 @@ export default class App extends Component {
           }
         />
         <Text>Value: {this.state.value}</Text>
-        {/* <AddEntry />
-        <TouchableNativeFeedback
+        <AddEntry />
+        {/* <TouchableNativeFeedback
           background={TouchableNativeFeedback.SelectableBackground()}
           onPress={this.handlePress}
         >

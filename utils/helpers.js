@@ -65,6 +65,7 @@ export function getMetricMetaInfo(metric) {
     eat: {
       displayName: 'Eat',
       max: 10,
+      step:1,
       unit: 'rating',
       type: 'slider',
       getIcon() {
@@ -82,6 +83,7 @@ export function getMetricMetaInfo(metric) {
     sleep: {
       displayName: 'Sleep',
       max: 24,
+      step:1,
       unit: 'hours',
       type: 'slider',
       getIcon() {
