@@ -23,15 +23,16 @@ export default class App extends Component {
 
       <View style={styles.container}>
 
-        <TouchableWithoutFeedback
+        <TouchableNativeFeedback
+          background={TouchableNativeFeedback.SelectableBackground()}
           onPress={this.handlePress}
         >
 
           <View style={styles.btn}>
-            <Text style={styles.btnText}>TouchableOpacity Btn</Text>
+            <Text style={styles.btnText}>TouchableNativeFeedback Btn</Text>
           </View>
 
-        </TouchableWithoutFeedback>
+        </TouchableNativeFeedback>
 
       </View>
     );
