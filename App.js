@@ -22,12 +22,12 @@ export default class App extends Component {
     return (
       <View style={styles.container}>
 
-        <TouchableHighlight style={styles.btn}
+        <TouchableOpacity style={styles.btn}
           onPress={this.handlePress}
           underlayColor='#d4371b'
         >
-          <Text style={styles.btnText}>TouchableHighlight Btn</Text>
-        </TouchableHighlight>
+          <Text style={styles.btnText}>TouchableOpacity Btn</Text>
+        </TouchableOpacity>
 
       </View>
     );
