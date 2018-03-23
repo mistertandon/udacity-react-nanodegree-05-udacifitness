@@ -20,14 +20,18 @@ export default class App extends Component {
 
   render() {
     return (
+
       <View style={styles.container}>
 
-        <TouchableOpacity style={styles.btn}
+        <TouchableWithoutFeedback
           onPress={this.handlePress}
-          underlayColor='#d4371b'
         >
-          <Text style={styles.btnText}>TouchableOpacity Btn</Text>
-        </TouchableOpacity>
+
+          <View style={styles.btn}>
+            <Text style={styles.btnText}>TouchableOpacity Btn</Text>
+          </View>
+
+        </TouchableWithoutFeedback>
 
       </View>
     );
