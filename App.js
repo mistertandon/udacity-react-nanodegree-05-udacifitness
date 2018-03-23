@@ -3,6 +3,7 @@ import {
   View,
   Text,
   StyleSheet,
+  Slider,
   TouchableHighlight,
   TouchableNativeFeedback,
   TouchableOpacity,
@@ -14,6 +15,10 @@ import AddEntry from './components/AddEntry'
 
 export default class App extends Component {
 
+  state = {
+    value: 0
+  }
+
   handlePress = () => {
     alert('hello from handlePress')
   }
@@ -22,7 +27,19 @@ export default class App extends Component {
     return (
 
       <View style={styles.container}>
-        <AddEntry />
+        <Slider value={this.state.value}
+          minimumValue={-10}
+          maximumValue={10}
+          step={1}
+          onValueChange={
+            (value) => {
+
+              this.setState(() => ({ value: value }))
+            }
+          }
+        />
+        <Text>Value: {this.state.value}</Text>
+        {/* <AddEntry />
         <TouchableNativeFeedback
           background={TouchableNativeFeedback.SelectableBackground()}
           onPress={this.handlePress}
@@ -32,7 +49,7 @@ export default class App extends Component {
             <Text style={styles.btnText}>TouchableNativeFeedback Btn</Text>
           </View>
 
-        </TouchableNativeFeedback>
+        </TouchableNativeFeedback> */}
       </View>
     );
   }
