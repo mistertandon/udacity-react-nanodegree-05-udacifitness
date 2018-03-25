@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { getMetricMetaInfo, timeToString, getDailyRemainderValue } from '../utils/helpers'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -10,7 +10,6 @@ import DateHeader from './DateHeader'
 import TextButton from './TextButton'
 import { submitEntry, removeEntry } from './../utils/api'
 import { recieveEntries, addEntry } from './../actions/entryAction'
-
 
 function SubmitBtn({ onPress }) {
 
