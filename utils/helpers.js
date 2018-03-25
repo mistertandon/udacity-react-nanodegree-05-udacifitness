@@ -11,7 +11,7 @@ export function getMetricMetaInfo(metric) {
     bike: {
       displayName: 'bike',
       max: 100,
-      step:1,
+      step: 1,
       unit: 'miles',
       type: 'stepper',
       getIcon() {
@@ -29,7 +29,7 @@ export function getMetricMetaInfo(metric) {
     run: {
       displayName: 'Run',
       max: 50,
-      step:1,
+      step: 1,
       unit: 'miles',
       type: 'stepper',
       getIcon() {
@@ -47,7 +47,7 @@ export function getMetricMetaInfo(metric) {
     swim: {
       displayName: 'Swim',
       max: 9900,
-      step:100,
+      step: 100,
       unit: 'meters',
       type: 'stepper',
       getIcon() {
@@ -65,7 +65,7 @@ export function getMetricMetaInfo(metric) {
     eat: {
       displayName: 'Eat',
       max: 10,
-      step:1,
+      step: 1,
       unit: 'rating',
       type: 'slider',
       getIcon() {
@@ -83,7 +83,7 @@ export function getMetricMetaInfo(metric) {
     sleep: {
       displayName: 'Sleep',
       max: 24,
-      step:1,
+      step: 1,
       unit: 'hours',
       type: 'slider',
       getIcon() {
@@ -147,3 +147,9 @@ export function timeToString(time = Date.now()) {
   return todayUTC.toISOString().split('T')[0]
 }
 
+export function getDailyRemainderValue() {
+
+  return {
+    today: "Don't forget to log your information today."
+  }
+}

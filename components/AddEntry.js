@@ -1,24 +1,28 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Text, View, TouchableOpacity } from 'react-native'
-import { getMetricMetaInfo, timeToString } from '../utils/helpers'
+import { getMetricMetaInfo, timeToString, getDailyRemainderValue } from '../utils/helpers'
+import { Ionicons } from '@expo/vector-icons'
 
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
 import DateHeader from './DateHeader'
+import TextButton from './TextButton'
+import { submitEntry, removeEntry } from './../utils/api'
+import { recieveEntries, addEntry } from './../actions/entryAction'
 
 
 function SubmitBtn({ onPress }) {
 
   return (
+
     <TouchableOpacity onPress={onPress}>
-
       <Text>Submit</Text>
-
     </TouchableOpacity>
   )
 }
 
-export default class AddEntry extends Component {
+class AddEntry extends Component {
 
   /**
    * @description: Local state contains five keys to store
@@ -97,6 +101,12 @@ export default class AddEntry extends Component {
     const key = timeToString();
     const entry = this.state;
 
+    this.props.dispatch(addEntry(
+      {
+        [key]: entry
+      }
+    ));
+
     this.setState(() => (
       {
         bike: 0,
@@ -107,18 +117,46 @@ export default class AddEntry extends Component {
       }
     ))
 
+    submitEntry({ key, entry })
+  }
+
+  reset = () => {
+
+    const time = timeToString();
+
+    this.props.dispatch(addEntry(
+      {
+        [time]: getDailyRemainderValue().today
+      }
+    ))
   }
 
   render() {
 
     const metaInfo = getMetricMetaInfo();
 
+    if (this.props.alreadyLogged) {
+
+      return (
+
+        <View>
+          <Ionicons name='ios-happy-outline'
+            size={30}
+          />
+          <Text>Already logged your information for today</Text>
+          <TextButton onPress={this.reset}>
+            Reset
+          </TextButton>
+        </View>
+
+      )
+    }
+
     return (
 
       <View>
 
         <DateHeader date={new Date().toLocaleDateString()} />
-        <Text>{JSON.stringify(this.state)}</Text>
         {
 
           Object.keys(metaInfo).map((metric) => {
@@ -167,3 +205,14 @@ export default class AddEntry extends Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+
+  const time = timeToString();
+
+  return {
+    alreadyLogged: state[time] && typeof state[time].today === 'undefined'
+  }
+}
+
+export default connect(mapStateToProps)(AddEntry)
