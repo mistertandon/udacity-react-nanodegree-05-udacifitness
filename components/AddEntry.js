@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { Text, View, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { getMetricMetaInfo, timeToString, getDailyRemainderValue } from '../utils/helpers'
 import { Ionicons } from '@expo/vector-icons'
 
@@ -10,13 +10,15 @@ import DateHeader from './DateHeader'
 import TextButton from './TextButton'
 import { submitEntry, removeEntry } from './../utils/api'
 import { recieveEntries, addEntry } from './../actions/entryAction'
+import { purple, gray, white, red, orange, blue, lightPurp, pink } from './../utils/colors'
 
 function SubmitBtn({ onPress }) {
 
   return (
 
-    <TouchableOpacity onPress={onPress}>
-      <Text>Submit</Text>
+    <TouchableOpacity onPress={onPress}
+      style={Platform.OS === 'ios' ? styles.iosSubmitBtn : styles.androidSubmitBtn}>
+      <Text style={styles.submitBtnText}>Submit</Text>
     </TouchableOpacity>
   )
 }
@@ -138,12 +140,13 @@ class AddEntry extends Component {
 
       return (
 
-        <View>
+        <View style={styles.center}>
           <Ionicons name='ios-happy-outline'
             size={30}
           />
           <Text>Already logged your information for today</Text>
-          <TextButton onPress={this.reset}>
+          <TextButton onPress={this.reset}
+            style={styles.resetBtn}>
             Reset
           </TextButton>
         </View>
@@ -153,7 +156,7 @@ class AddEntry extends Component {
 
     return (
 
-      <View>
+      <View style={{ padding: 20, backgroundColor: white }}>
 
         <DateHeader date={new Date().toLocaleDateString()} />
         {
@@ -164,7 +167,7 @@ class AddEntry extends Component {
             const value = this.state[metric];
 
             return (
-              <View key={metric}>
+              <View key={metric} style={{ flexDirection: 'row' }}>
 
                 {getIcon()}
 
@@ -172,24 +175,12 @@ class AddEntry extends Component {
                   type === 'slider'
                     ? <UdaciSlider
                       value={value}
-                      onChange={
-                        (value) => {
-                          this.slide(metric, value)
-                        }
-                      }
+                      onChange={(value) => { this.slide(metric, value) }}
                       {...rest}
                     />
                     : <UdaciSteppers
-                      onIncrement={
-                        () => {
-                          this.increment(metric)
-                        }
-                      }
-                      onDecrement={
-                        () => {
-                          this.decrement(metric)
-                        }
-                      }
+                      onIncrement={() => { this.increment(metric) }}
+                      onDecrement={() => { this.decrement(metric) }}
                       value={value}
                       {...rest}
                     />
@@ -204,6 +195,53 @@ class AddEntry extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create(
+  {
+    container: {
+      flex: 1,
+      padding: 20
+    },
+    row: {
+      flexDirection: 'row',
+      flex: 1,
+      alignItems: 'center'
+    },
+    iosSubmitBtn: {
+      backgroundColor: 'purple',
+      padding: 10,
+      marginLeft: 40,
+      marginRight: 40,
+      borderRadius: 8,
+      height: 45
+    },
+    androidSubmitBtn: {
+      backgroundColor: 'purple',
+      padding: 8,
+      paddingLeft: 40,
+      paddingRight: 40,
+      borderRadius: 8,
+      height: 40,
+      justifyContent: 'center',
+      alignItems: 'center',
+      alignSelf: 'flex-end'
+    },
+    submitBtnText: {
+      color: white,
+      textAlign: 'center',
+      fontSize: 21
+    },
+    center: {
+      flex: 1,
+      marginLeft: 20,
+      marginRight: 20,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    resetBtn: {
+      padding: 10
+    }
+  })
 
 function mapStateToProps(state) {
 

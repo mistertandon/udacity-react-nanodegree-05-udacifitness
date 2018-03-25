@@ -42,6 +42,6 @@ const styles = StyleSheet.create(
       flex: 1,
       marginLeft: 10,
       marginRight: 10,
-      justifyContent: 'center'
+      justifyContent: 'space-around'
     }
   })
