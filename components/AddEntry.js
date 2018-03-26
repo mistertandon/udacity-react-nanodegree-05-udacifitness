@@ -156,7 +156,7 @@ class AddEntry extends Component {
 
     return (
 
-      <View style={{ padding: 20, backgroundColor: white }}>
+      <View style={{ flex:1, padding: 20, backgroundColor: white, justifyContent:'space-around' }}>
 
         <DateHeader date={new Date().toLocaleDateString()} />
         {

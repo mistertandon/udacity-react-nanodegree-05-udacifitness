@@ -12,10 +12,10 @@ export default function UdaciSteppers({ value, unit, step, max, onIncrement, onD
     <View style={styles.stepperContainer}>
       <View style={styles.flexRowRef}>
         <TouchableOpacity onPress={onDecrement} style={styles.androidBtn}>
-          <FontAwesome name='minus' size={30} color={'black'} />
+          <FontAwesome name='minus' size={30} color={white} />
         </TouchableOpacity>
         <TouchableOpacity onPress={onIncrement} style={styles.androidBtn}>
-          <FontAwesome name='plus' size={30} color={'red'} />
+          <FontAwesome name='plus' size={30} color={white} />
         </TouchableOpacity>
       </View>
       <View style={styles.matricCounter}>
@@ -40,6 +40,7 @@ const styles = StyleSheet.create(
     androidBtn: {
       borderWidth: 1,
       borderRadius: 3,
+      backgroundColor: purple,
       margin: 5,
       padding: 7
 
