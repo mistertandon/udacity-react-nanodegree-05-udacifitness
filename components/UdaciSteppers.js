@@ -19,8 +19,8 @@ export default function UdaciSteppers({ value, unit, step, max, onIncrement, onD
         </TouchableOpacity>
       </View>
       <View style={styles.matricCounter}>
-        <Text style={{ fontSize: 20 }}>{value}</Text>
-        <Text style={{ color: gray, fontSize: 12 }}>{unit}</Text>
+        <Text style={styles.matricCounterValue}>{value}</Text>
+        <Text style={styles.matricCounterUnit}>{unit}</Text>
       </View>
     </View >
 
@@ -46,7 +46,16 @@ const styles = StyleSheet.create(
     },
     matricCounter: {
       justifyContent: 'center',
-      width:55
+      width: 55
+    },
+    matricCounterValue: {
+      fontSize: 20,
+      textAlign: 'center'
+    },
+    matricCounterUnit: {
+      color: gray,
+      fontSize: 12,
+      textAlign: 'center'
     }
   }
 )
