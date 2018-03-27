@@ -17,6 +17,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 import entryReducer from './reducers/entryReducer'
 import AddEntry from './components/AddEntry'
+import History from './components/History'
 
 export default class App extends Component {
 
@@ -28,7 +29,7 @@ export default class App extends Component {
 
       <Provider store={this.store}>
         <View style={styles.container}>
-          <AddEntry />
+          <History />
         </View>
       </Provider>
 

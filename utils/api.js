@@ -1,5 +1,16 @@
 import { AsyncStorage } from 'react-native'
-import { CALENDAR_STORAGE_KEY } from './_calendar'
+import { CALENDAR_STORAGE_KEY, formatCalendarResults } from './_calendar'
+
+/**
+ * @description This function is used to get calender results
+ *
+ * @param
+ */
+export function fetchCalenderResults() {
+
+  return Async.getItem(CALENDAR_STORAGE_KEY)
+    .then(formatCalendarResults)
+}
 
 /**
  * @description This function is used to add/update entry
@@ -21,10 +32,10 @@ export function submitEntry({ entry, key }) {
  * @param {key} String
  * @returns none
  */
-  export function removeEntry({ key }) {
+export function removeEntry({ key }) {
 
-    return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
-      .then((result) => {
+  return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
+    .then((result) => {
 
       var data = JSON.parse(result);
       data[key] = undefined;
