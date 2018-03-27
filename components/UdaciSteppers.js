@@ -1,9 +1,8 @@
 import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-
 import { FontAwesome, Entypo } from '@expo/vector-icons'
 
-import { purple, gray, white, red, orange, blue, lightPurp, pink } from './../utils/colors'
+import { purple, gray, white } from './../utils/colors'
 
 export default function UdaciSteppers({ value, unit, step, max, onIncrement, onDecrement }) {
 
