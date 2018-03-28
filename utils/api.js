@@ -7,9 +7,18 @@ import { CALENDAR_STORAGE_KEY, formatCalendarResults } from './_calendar'
  * @param
  */
 export function fetchCalenderResults() {
+  // Uncomment below code to remove `CALENDAR_STORAGE_KEY`
+  //
+  // return AsyncStorage.removeItem(CALENDAR_STORAGE_KEY)
+  //   .then(
+  //     () => {
+  //       return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
+  //     })
+  //   .then(formatCalendarResults);
 
   return AsyncStorage.getItem(CALENDAR_STORAGE_KEY)
-    .then(formatCalendarResults)
+    .then(formatCalendarResults);
+
 }
 
 /**
