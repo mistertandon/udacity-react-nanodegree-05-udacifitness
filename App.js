@@ -21,13 +21,11 @@ import History from './components/History'
 
 export default class App extends Component {
 
-  store = createStore(entryReducer)
-
   render() {
 
     return (
 
-      <Provider store={this.store}>
+      <Provider store={createStore(entryReducer)}>
         <View style={styles.container}>
           <History />
         </View>
