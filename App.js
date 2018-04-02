@@ -6,30 +6,76 @@ import {
   View,
   Text,
   StyleSheet,
-  Slider,
-  TouchableHighlight,
-  TouchableNativeFeedback,
-  TouchableOpacity,
-  TouchableWithoutFeedback
+  StatusBar
 } from 'react-native';
 
-import { Ionicons } from '@expo/vector-icons';
+import { Cons } from '@expo/vector-icons';
+import { Constants } from 'expo';
 
 import entryReducer from './reducers/entryReducer'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
+import { TabNavigator } from 'react-navigation'
+import { white, purple } from './utils/colors'
+
+
+function UdacityFitnessStatusBar({ backgroundColor, ...props }) {
+
+  return (
+    <View style={{ backgroundColor, height: Constants.statusBarHeight }}>
+      <StatusBar translucent backgroundColor={backgroundColor} />
+    </View >
+  )
+}
+
+const Tabs = TabNavigator(
+  {
+    History: {
+      screen: History,
+      navigationOptions: {
+        tabBarLabel: 'History',
+        tabBarIcon: ({ tintColor }) => <FontAwesome name='bookmark' size={30} color={tintColor} />
+      }
+    },
+    AddEntry: {
+      screen: AddEntry,
+      navigationOptions: {
+        tabBarLabel: 'Add Entry',
+        tabBarIcon: ({ tintColor }) => <FontAwesome name='library-add' size={30} color={tintColor} />
+      }
+    }
+  },
+  {
+    navigationOptions: {
+      header: null
+    },
+    tabBarOptions: {
+      activeTintColor: white,
+      style: {
+        height: 56,
+        backgroundColor: purple,
+        shadowColor: '#C7C7C7',
+        shadowOffset: {
+          width: 0,
+          height: 3
+        },
+        shadowRadius: 6,
+        shadowOpacity: 1
+      }
+    }
+  }
+)
 
 export default class App extends Component {
-
-  store = createStore(entryReducer);
 
   render() {
 
     return (
 
-      <Provider store={this.store}>
+      <Provider store={createStore(entryReducer)}>
         <View style={styles.container}>
-          <History />
+          <UdacityFitnessStatusBar backgroundColor={white} barStyle="light-content" />
+          <Tabs />
         </View>
       </Provider>
 

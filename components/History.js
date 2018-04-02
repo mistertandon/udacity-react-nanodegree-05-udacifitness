@@ -1,13 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet, Platform, TouchableOpacity } from 'react-native'
+import UdacifitnessCalendar from 'udacifitness-calendar'
+import { AppLoading } from 'expo'
 
+import DateHeader from './DateHeader'
 import { recieveEntries, addEntry } from './../actions/entryAction'
 import { timeToString, getDailyRemainderValue } from '../utils/helpers'
 import { fetchCalenderResults } from '../utils/api'
-import UdacifitnessCalendar from 'udacifitness-calendar'
+import { white } from './../utils/colors'
+import MatricCard from './MatricCard'
 
 class History extends Component {
+
+  state = {
+    ready: false
+  }
 
   componentDidMount() {
 
@@ -29,28 +37,49 @@ class History extends Component {
   }
 
   renderItem = ({ today, ...matrices }, formattedDate, key) => (
-    <View>
+
+    <View style={styles.item}>
       {
         today
-          ? <Text>{JSON.stringify(today)}</Text>
-          : <Text>{JSON.stringify(matrices)}</Text>
+          ?
+          <View>
+            <DateHeader date={formattedDate} />
+            <Text style={styles.noDatatext}>
+              {JSON.stringify(today)}
+            </Text>
+          </View>
+          : <TouchableOpacity onPress={() => console.log('TochableOpacity')}>
+
+            <MatricCard date={formattedDate} matrices={matrices} />
+
+          </TouchableOpacity>
       }
     </View>
   )
 
-  renderEmptyDate() {
+  renderEmptyDate(formattedDate) {
 
     return (
-      <View>
-        <Text>No data has been added for today.</Text>
+
+      <View style={styles.item}>
+        <DateHeader date={formattedDate} />
+        <Text style={styles.noDatatext}>
+          No data has been added for today.
+        </Text>
       </View>
     )
   }
 
   render() {
 
+    const { ready } = this.state;
     const { entries } = this.props;
-    console.log(entries);
+
+    if (ready === false) {
+
+      return <AppLoading />
+    }
+
     return (
 
       <UdacifitnessCalendar
@@ -62,8 +91,34 @@ class History extends Component {
     )
   }
 }
-function mapStateToProps(entries) {
 
+const styles = StyleSheet.create(
+  {
+    item: {
+      backgroundColor: white,
+      borderRadius: 8,
+      padding: 5,
+      marginLeft: 10,
+      marginRight: 10,
+      marginTop: 17,
+      shadowRadius: 3,
+      shadowOpacity: 0.8,
+      shadowColor: 'gray',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      }
+    },
+    noDatatext: {
+      fontSize: 15,
+      paddingTop: 15,
+      paddingBottom: 15
+    }
+  }
+)
+
+function mapStateToProps(entries) {
+  console.log(entries);
   return {
     entries
   }
