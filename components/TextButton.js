@@ -6,7 +6,7 @@ export default function TextButton({ children, onPress }) {
   return (
 
     <View>
-      <TouchableOpacity onPres={onPress}>
+      <TouchableOpacity onPress={onPress}>
         <Text>{children}</Text>
       </TouchableOpacity>
     </View>

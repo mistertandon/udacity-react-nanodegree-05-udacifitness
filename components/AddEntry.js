@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Text, View, TouchableOpacity, StyleSheet, Platform } from 'react-native'
 import { getMetricMetaInfo, timeToString, getDailyRemainderValue } from '../utils/helpers'
 import { Ionicons } from '@expo/vector-icons'
+import { NavigationActions } from 'react-navigation'
 
 import UdaciSlider from './UdaciSlider'
 import UdaciSteppers from './UdaciSteppers'
@@ -97,6 +98,11 @@ class AddEntry extends Component {
     this.setState(() => ({ [metric]: value }))
   }
 
+  toHome = () => {
+
+    this.props.navigation.dispatch(NavigationActions.back({ key: 'AddEntry' }))
+  }
+
   submit = () => {
 
     const key = timeToString();
@@ -118,7 +124,8 @@ class AddEntry extends Component {
       }
     ))
 
-    submitEntry({ key, entry })
+    this.toHome();
+    submitEntry({ key, entry });
   }
 
   reset = () => {
@@ -156,7 +163,7 @@ class AddEntry extends Component {
 
     return (
 
-      <View style={{ flex:1, padding: 20, backgroundColor: white, justifyContent:'space-around' }}>
+      <View style={{ flex: 1, padding: 20, backgroundColor: white, justifyContent: 'space-around' }}>
 
         <DateHeader date={new Date().toLocaleDateString()} />
         {

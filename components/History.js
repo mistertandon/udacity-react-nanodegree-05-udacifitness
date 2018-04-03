@@ -48,7 +48,11 @@ class History extends Component {
               {JSON.stringify(today)}
             </Text>
           </View>
-          : <TouchableOpacity onPress={() => console.log('TochableOpacity')}>
+          : <TouchableOpacity onPress={
+            () => this.props.navigation.navigate(
+              'EntryDetail',
+              { 'entryId': key }
+            )}>
 
             <MatricCard date={formattedDate} matrices={matrices} />
 
@@ -118,7 +122,7 @@ const styles = StyleSheet.create(
 )
 
 function mapStateToProps(entries) {
-  console.log(entries);
+
   return {
     entries
   }

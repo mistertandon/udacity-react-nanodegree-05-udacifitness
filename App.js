@@ -11,11 +11,13 @@ import {
 
 import { Cons } from '@expo/vector-icons';
 import { Constants } from 'expo';
+import { TabNavigator, StackNavigator } from 'react-navigation'
 
 import entryReducer from './reducers/entryReducer'
 import AddEntry from './components/AddEntry'
 import History from './components/History'
-import { TabNavigator } from 'react-navigation'
+import EntryDetail from './components/EntryDetail'
+
 import { white, purple } from './utils/colors'
 
 
@@ -66,6 +68,22 @@ const Tabs = TabNavigator(
   }
 )
 
+const MainNavigation = StackNavigator(
+  {
+    Home: {
+      screen: Tabs
+    },
+    EntryDetail: {
+      screen: EntryDetail,
+      navigationOptions: {
+        headerTintColor: white,
+        headerStyle: {
+          backgroundColor: purple
+        }
+      }
+    }
+  }
+)
 export default class App extends Component {
 
   render() {
@@ -75,7 +93,7 @@ export default class App extends Component {
       <Provider store={createStore(entryReducer)}>
         <View style={styles.container}>
           <UdacityFitnessStatusBar backgroundColor={white} barStyle="light-content" />
-          <Tabs />
+          <MainNavigation />
         </View>
       </Provider>
 
@@ -87,8 +105,6 @@ const styles = StyleSheet.create(
   {
     container: {
       flex: 1,
-      marginLeft: 10,
-      marginRight: 10,
       justifyContent: 'space-around'
     }
   })

@@ -13,7 +13,7 @@ export default function DateHeader({ date }) {
 const styles = StyleSheet.create(
   {
     dateCss: {
-      fontSize: 17,
+      fontSize: 16,
       color: purple
     }
   }
